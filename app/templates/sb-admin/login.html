@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Callback Login</title>
+
+    <!-- Core CSS - Include with every page -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- SB Admin CSS - Include with every page -->
+    <link href="static/css/sb-admin.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger alert-dismissable">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      {{ message }} 
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+                <img style="margin:0px auto;display:block;" src="{{ url_for('static', filename='hydra_login.png') }}">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" name="login" method="post">
+                        {{ form.hidden_tag() }}
+                            <fieldset>
+                                {% for field in form %}
+                                    {% if field.type in ["TextField", "PasswordField", "BooleanField"] %}
+                                        <div class="form-group list-group-item">
+                                            <div class="form-group input-group">
+                                                <span class="input-group-addon" style="width:140px;">{{ field.short_name.replace("_", " ").title() }}
+                                                {% if field.flags.required %}
+                                                    <span style="color: red;">*</span>
+                                                {% endif %}
+                                                </span>
+                                                {{ field(size="100%",class="form-control",placeholder="Enter the " + field.short_name.replace("_", " ")) }}
+                                            </div>
+                                            {% if field.flags.required %}
+                                                {% for error in field.errors %}
+                                                    <span style="color:red;">[{{error}}]</span>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                <div class="form-group">
+                                    <input class="form-control" type="submit" value="Login">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Scripts - Include with every page -->
+    <script src="static/js/jquery-1.10.2.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!-- SB Admin Scripts - Include with every page -->
+    <script src="static/js/sb-admin.js"></script>
+
+</body>
+
+</html>

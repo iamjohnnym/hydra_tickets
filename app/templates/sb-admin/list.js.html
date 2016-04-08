@@ -1,0 +1,65 @@
+{% extends 'sb-admin/base.html' %}
+{% block content %}
+        <div class="row">
+          <div class="col-lg-12">
+              <h1><i class="fa fa-phone"></i> Tickets <small>List of Tickets</small></h1>
+            <ol class="breadcrumb">
+              <li class="active"><i class="fa fa-dashboard"></i> Tickets</li>
+            </ol>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success alert-dismissable">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      {{ message }} 
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <div id="connection-danger" class="alert alert-danger alert-dismissable">
+              <div id="connection-lost"></div>
+            </div>
+          </div>
+        </div><!-- /.row -->
+
+        <div id="main" class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-clock-o"></i> Tickets</h3>
+              </div>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-striped tablesorter">
+        <thead>
+          <tr>
+            <th width="8%">Platform <i class="fa fa-sort"></i></th>
+            <th width="7%">Status <i class="fa fa-sort"></i></th>
+            <th width="8%">Account <i class="fa fa-sort"></i></th>
+            <th width="17%">Name <i class="fa fa-sort"></i></th>
+            <th width="15%">Phone <i class="fa fa-sort"></i></th>
+            <th width="15%">Created <i class="fa fa-sort"></i></th>
+            <th width="15%">Last Updated <i class="fa fa-sort"></i></th>
+            <th width="7%">Access</th>
+          </tr>
+        </thead>
+        <tbody>
+            <!-- ko foreach: callbacks -->
+            <tr class="cb-row" data-bind="attr: {class: label }">
+                    <td style="margin-bottom:-5px" class="cb-cell"><i data-bind="attr: {class: platform_fa }"></i> <span data-bind="html: platform"></span></td>
+                    <td class="cb-cell"><p data-bind="text: status"></p></td>
+                    <td class="cb-cell"><a data-bind="html: ddi, attr: {href: ddi_url}" target="__blank"></a></td>
+                    <td class="cb-cell"><p data-bind="html: name"></p></td>
+                    <td class="cb-cell"><p data-bind="text: phone"></p></td>
+                    <td class="cb-cell"><p data-bind="html: created"></p></td>
+                    <td class="cb-cell"><p data-bind="text: updated"></p></td>
+                    <td class="cb-cell"><a data-bind="attr: {href: uri }">View</a></td>
+                </tr>
+            <!-- /ko -->
+        </tbody>
+    </table>
+
+            </div>
+          </div>
+        </div><!-- /.row -->
+    <script src="{{ url_for('static', filename='js/ajaxlist.js') }}"></script>
+{% endblock %}

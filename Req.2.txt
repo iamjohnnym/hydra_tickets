@@ -1,0 +1,7 @@
+MySQL-python==1.2.5
+iniparse==0.3.1
+kerberos==1.0
+pycurl==7.19.0
+pygpgme==0.1
+urlgrabber==3.9.1
+yum-metadata-parser==1.1.2
