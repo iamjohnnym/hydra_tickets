@@ -12,7 +12,7 @@ email, same when updating the status.
 ### Installation
 
 ```
-$ git clone https://github.rackspace.com/john6301/hydra
+$ git clone https://github.com/iamjohnnym/hydra_tickets.git
 ```
 
 Once in the repo:
